@@ -1,0 +1,72 @@
+﻿<Window x:Class="KursPavl.Create_lot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KursPavl"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Аукцион" Height="450" Width="800">
+    <Grid Background="#DEB887">
+        <TabControl>
+            <TabItem Header="Создание лота" FontSize="10" Background="#DEB887">
+                <Grid Background="#DEB887">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="337*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border MinHeight="200" Margin="10,0,10,0" Height="450" Background="Wheat" VerticalAlignment="Center" Padding="30" MaxHeight="350" CornerRadius="30" Grid.ColumnSpan="2">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+                        </Border.Effect>
+
+                        <StackPanel>
+                            <TextBlock Text="Добавить лот" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"/>
+                            <ComboBox x:Name="comboBoxAuction" materialDesign:HintAssist.Hint="Выберите аукцион"/>
+                            <ComboBox x:Name="comboBoxSeller" materialDesign:HintAssist.Hint="Выберите продавца"/>
+                            <TextBox x:Name="textBoxLotName" materialDesign:HintAssist.Hint="Введите название лота"/>
+                            <TextBox x:Name="textBoxLotPrice" materialDesign:HintAssist.Hint="Введите цену"/>
+                            <TextBox x:Name="textBoxDataEvent" materialDesign:HintAssist.Hint="Введите дату проведения"/>
+                            <TextBox x:Name="textBoxDescription" materialDesign:HintAssist.Hint="Описание"/>
+                            <Button Content="Зарегистрировать лот" Margin="10 10" Click="RegisterLotButton_Click"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Аукцион лотов" FontSize="10" Background="#DEB887">
+                <Border Height="450" Width="800" Background="Wheat" VerticalAlignment="Center" Padding="30" CornerRadius="30" Margin="0,0,-6,0" >
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+                    </Border.Effect>
+                    <StackPanel Background="#DEB887">
+                        <TextBlock Text="Аукцион" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"/>
+                        <Button Content="Купить лот" HorizontalAlignment="Left" Click="BuyLotButton_Click"/>
+                        <DataGrid Name="dataGrid1" Background="#FFDEAD"/>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+
+            <TabItem Header="Данные покупки" FontSize="10" Background="#DEB887">
+                <Border Height="450" Width="800" Background="Wheat" VerticalAlignment="Center" Padding="30" CornerRadius="30" Margin="0,0,-6,0">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
+                    </Border.Effect>
+                    <StackPanel Background="#DEB887">
+                        <TextBlock Text="Данные аукциона" FontSize="30" FontWeight="Bold" Margin="0 0 0 10"/>
+                        <ListView Name="monsterList" Grid.Row="2">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Width="50">ID</GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="100">Имя</GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Lot}" Width="100">Лот</GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Width="100">Цена лота</GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

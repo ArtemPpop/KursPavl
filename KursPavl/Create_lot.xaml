@@ -28,6 +28,7 @@
                             <TextBox x:Name="textBoxLotPrice" materialDesign:HintAssist.Hint="Введите цену"/>
                             <TextBox x:Name="textBoxDataEvent" materialDesign:HintAssist.Hint="Введите дату проведения"/>
                             <TextBox x:Name="textBoxDescription" materialDesign:HintAssist.Hint="Описание"/>
+                            <TextBox x:Name="textBoxFinalPrice" materialDesign:HintAssist.Hint="Введите конечную цену"/>
                             <Button Content="Зарегистрировать лот" Margin="10 10" Click="RegisterLotButton_Click"/>
                         </StackPanel>
                     </Border>

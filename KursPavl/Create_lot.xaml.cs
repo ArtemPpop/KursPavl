@@ -15,6 +15,7 @@ namespace KursPavl
         public Create_lot()
         {
             InitializeComponent();
+            SQLitePCL.raw.SetProvider(new SQLite3Provider_sqlite3());
             LoadComboBoxData();
         }
 
@@ -40,10 +41,30 @@ namespace KursPavl
             }
         }
 
+        private void BuyLotButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем выбранный лот
+            if (dataGrid1.SelectedItem != null)
+            {
+                Lot selectedLot = (Lot)dataGrid1.SelectedItem;
+
+                // Предполагаем, что покупатель уже аутентифицирован и его ID известен
+                int buyerID = GetCurrentBuyerID();
+                double finalPrice = double.Parse(textBoxFinalPrice.Text); // Предполагаем, что цена введена
+
+                RecordSale(selectedLot.LotID, buyerID, finalPrice);
+                MessageBox.Show("Lot purchased successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Please select a lot to purchase.");
+            }
+        }
+
         // Метод для загрузки данных в ComboBox
         private void LoadComboBoxData()
         {
-            using (var connection = new SqliteConnection("Data Source=auction.db"))
+            using (var connection = new SqliteConnection("DataSource=auction.db"))
             {
                 connection.Open();
 
@@ -103,6 +124,22 @@ namespace KursPavl
                     command.ExecuteNonQuery();
                 }
             }
+        }
+
+        private void RecordSale(int lotID, int buyerID, double finalPrice)
+        {
+            // Запись информации о продаже лота в базу данных
+            // Ваш код для выполнения этой операции
+        }
+
+        // Метод для получения идентификатора текущего покупателя
+        private int GetCurrentBuyerID()
+        {
+            // Ваша логика для получения идентификатора текущего покупателя
+            // Например, если у вас есть сеанс аутентификации, можете получить идентификатор текущего пользователя из него
+            // Здесь предполагается, что у вас есть переменная currentUserID, которая содержит идентификатор текущего покупателя
+            int currentUserID = 0; // Инициализируйте переменную соответствующим образом
+            return currentUserID;
         }
     }
 }

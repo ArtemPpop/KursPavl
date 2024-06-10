@@ -25,7 +25,6 @@ namespace KursPavl
             InitializeComponent();
             comboBoxAuction = new ComboBox();
             comboBoxSeller = new ComboBox();
-            LoadComboBoxData(); // Добавляем вызов метода для загрузки данных в комбобоксы
         }
         public ComboBox comboBoxAuction;
         public ComboBox comboBoxSeller;
@@ -41,52 +40,6 @@ namespace KursPavl
         {
             Create_lot create_Lot = new Create_lot();
             create_Lot.Show();
-        }
-
-        private void LoadComboBoxData()
-        {
-            using (var connection = new SqliteConnection("Data Source=auction.db"))
-            {
-                connection.Open();
-
-                // Загрузка аукционов
-                string queryAuction = "SELECT AuctionID, Name FROM Auction";
-                using (var command = new SqliteCommand(queryAuction, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        var auctions = new List<Auction>();
-                        while (reader.Read())
-                        {
-                            auctions.Add(new Auction
-                            {
-                                AuctionID = reader.GetInt32(0),
-                                Name = reader.GetString(1)
-                            });
-                        }
-                        comboBoxAuction.ItemsSource = auctions;
-                    }
-                }
-
-                // Загрузка продавцов
-                string querySeller = "SELECT SellerID, Name FROM Seller";
-                using (var command = new SqliteCommand(querySeller, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        var sellers = new List<Seller>();
-                        while (reader.Read())
-                        {
-                            sellers.Add(new Seller
-                            {
-                                SellerID = reader.GetInt32(0),
-                                Name = reader.GetString(1)
-                            });
-                        }
-                        comboBoxSeller.ItemsSource = sellers;
-                    }
-                }
-            }
         }
         public List<Auction> GetAuctionsByDateRange(DateTime startDate, DateTime endDate)
         {
